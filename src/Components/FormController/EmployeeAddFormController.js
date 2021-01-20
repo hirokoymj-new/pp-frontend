@@ -28,7 +28,7 @@ export const EmployeeAddFormController = ({ children }) => {
       enqueueSnackbar("Employee successfully created!", {
         variant: "success",
       });
-      history.push("/employeeList");
+      history.push("/admin");
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Failed to create employee", {

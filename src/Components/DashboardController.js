@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { SnackbarProvider } from "notistack";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -10,7 +10,6 @@ import { DashboardHeader } from "Components/Headers/DashboardHeader";
 import { MenuDrawer, MobileMenuDrawer } from "Components/Drawers/MenuDrawer";
 import { PerformanceView } from "Components/PageView/PerformanceView";
 import { EmployeeView } from "Components/PageView/EmployeeView";
-import { TestView } from "Components/PageView/TestView";
 import {
   closeNavigation,
   openNavigation,
@@ -58,8 +57,14 @@ export const DashboardController = connect(null, {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Switch>
-            <Route path="/" exact component={TestView} />
-            <Route path="/employeeList" component={EmployeeView} />
+            <Route
+              path="/"
+              exact
+              render={() => {
+                return <Redirect to="/admin" />;
+              }}
+            />
+            <Route path="/admin" component={EmployeeView} />
             <Route path="/performance" component={PerformanceView} />
           </Switch>
         </main>

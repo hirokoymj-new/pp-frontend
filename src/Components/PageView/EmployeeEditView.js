@@ -60,7 +60,7 @@ export const EmployeeEditView = () => {
 
   const onClose = () => {
     setOpen(false);
-    history.push("/employeeList");
+    history.push("/admin");
   };
 
   return (

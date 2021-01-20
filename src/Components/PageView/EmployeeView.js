@@ -56,17 +56,17 @@ export const EmployeeView = () => {
   return (
     <>
       <Switch>
-        <Route path={`/employeeList/edit/:id`} component={EmployeeEditView} />
-        <Route path={`/employeeList/add`} component={EmployeeAddView} />
+        <Route path={`/admin/edit/:id`} component={EmployeeEditView} />
+        <Route path={`/admin/add`} component={EmployeeAddView} />
       </Switch>
-      <DashboardLayout title="Employee List">
+      <DashboardLayout title="Employee Admin">
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <RouterButton
               variant="contained"
               color="secondary"
               text="Add Employee"
-              to="/employeeList/add"
+              to="/admin/add"
               icon={<AddIcon />}
             />
             <Paper>

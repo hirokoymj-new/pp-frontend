@@ -29,7 +29,7 @@ export const Logo = () => {
       to={{ pathname: "/", state: { title: "7 days Forecast" } }}
       className={classes.logo}>
       <Typography variant="h6" component="h1">
-        Employee Admin
+        Paypay Dashboard
       </Typography>
     </Link>
   );

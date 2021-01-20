@@ -21,7 +21,7 @@ export const EmployeeTable = ({ openDialog }) => {
       const actions = (
         <>
           <ActionRouterButton
-            to={`/employeeList/edit/${id}`}
+            to={`/admin/edit/${id}`}
             title="Edit Employee"
             icon="edit"
           />
