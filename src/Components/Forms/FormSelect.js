@@ -20,8 +20,7 @@ export const FormSelect = ({
       error={touched && error}
       fullWidth
       variant={variant}
-      margin={margin ? margin : ""}
-    >
+      margin={margin ? margin : ""}>
       <InputLabel id={input.name}>{label}</InputLabel>
       <Select
         labelId={input.name}
@@ -33,8 +32,7 @@ export const FormSelect = ({
           onBlur: input.onBlur,
         }}
         label={label}
-        {...custom}
-      >
+        {...custom}>
         {options.map(({ value, label }) => (
           <MenuItem key={value} value={value}>
             {label}

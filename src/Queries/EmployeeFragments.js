@@ -7,6 +7,7 @@ export const EmployeeFragments = {
       firstName
       lastName
       email
+      title
       createdAt
       updatedAt
     }

@@ -6,7 +6,8 @@ export const paypayTheme = createMuiTheme({
       main: "#002653",
     },
     secondary: {
-      main: "#4CAF50",
+      // main: "#4CAF50",
+      main: "#3949ab",
     },
     text: {
       primary: "#000",

@@ -12,10 +12,10 @@ export const CREATE_PERFORMANCE = gql`
       createdAt
       updatedAt
       employee {
-        ...employeeInfo
+        ...EmployeeInfo
       }
       evaluator {
-        ...employeeInfo
+        ...EmployeeInfo
       }
     }
   }

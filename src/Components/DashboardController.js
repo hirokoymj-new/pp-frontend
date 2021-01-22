@@ -65,7 +65,7 @@ export const DashboardController = connect(null, {
               }}
             />
             <Route path="/admin" component={EmployeeView} />
-            <Route path="/performance" component={PerformanceView} />
+            <Route path="/review/:id" component={PerformanceView} />
           </Switch>
         </main>
       </SnackbarProvider>

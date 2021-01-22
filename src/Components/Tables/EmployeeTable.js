@@ -9,15 +9,15 @@ import { Table } from "Components/Tables/Table";
 import { Title } from "Components/Titles/Title";
 import { ActionRouterButton } from "Components/Buttons/ActionRouterButton";
 import { ActionLinkButton } from "Components/Buttons/ActionLinkButton";
+import { RouterButton } from "Components/Buttons/RouterButton";
 
 export const EmployeeTable = ({ openDialog }) => {
   const { data, loading } = useQuery(EMPLOYEES);
-  console.log(data);
   const employees = !loading && get(data, "employees", []);
 
   const mappedData = map(
     employees,
-    ({ id, firstName, lastName, email, createdAt }) => {
+    ({ id, firstName, lastName, email, title, createdAt }) => {
       const actions = (
         <>
           <ActionRouterButton
@@ -26,6 +26,7 @@ export const EmployeeTable = ({ openDialog }) => {
             icon="edit"
           />
           <ActionLinkButton onClick={(e) => openDialog(e, id)} icon="delete" />
+          <RouterButton text="Review" to={`/review/${id}`} />
         </>
       );
       const created = moment(createdAt).format("MM/DD/YYYY");
@@ -35,6 +36,7 @@ export const EmployeeTable = ({ openDialog }) => {
         firstName,
         lastName,
         email,
+        title,
         created,
         actions,
       };
@@ -57,11 +59,15 @@ export const EmployeeTable = ({ openDialog }) => {
             field: "lastName",
           },
           {
+            label: "Title",
+            field: "title",
+          },
+          {
             label: "Email",
             field: "email",
           },
           {
-            label: "Created",
+            label: "Created On",
             field: "created",
           },
           {

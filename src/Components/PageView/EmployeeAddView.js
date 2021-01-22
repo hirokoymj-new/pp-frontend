@@ -47,6 +47,14 @@ const EmployeeAddFormDrawer = reduxForm({
             label="Email"
             margin="normal"
           />
+          <Field
+            name="title"
+            component={FormTextField}
+            fullWidth
+            variant="outlined"
+            label="Title"
+            margin="normal"
+          />
         </>
       )}
     </DrawerDialog>

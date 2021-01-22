@@ -40,6 +40,14 @@ const EmployeeEditFormDrawer = reduxForm({
             margin="normal"
           />
           <Field
+            name="title"
+            component={FormTextField}
+            fullWidth
+            variant="outlined"
+            label="Title"
+            margin="normal"
+          />
+          <Field
             name="email"
             component={FormTextField}
             fullWidth

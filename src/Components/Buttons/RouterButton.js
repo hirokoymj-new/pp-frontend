@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     color: theme.palette.common.white,
     fontSize: "1.1rem",
-    marginBottom: theme.spacing(2),
   },
 }));
 

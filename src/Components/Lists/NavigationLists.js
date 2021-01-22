@@ -12,12 +12,12 @@ export const TechNavItems = ({ setDrawerClosed }) => {
         icon={<LibraryBooksOutlinedIcon />}
         onClick={setDrawerClosed && setDrawerClosed}
       />
-      <ListItemLink
-        to="/performance"
+      {/* <ListItemLink
+        to="/review"
         text="Performance"
         icon={<LibraryBooksOutlinedIcon />}
         onClick={setDrawerClosed && setDrawerClosed}
-      />
+      /> */}
     </>
   );
 };
