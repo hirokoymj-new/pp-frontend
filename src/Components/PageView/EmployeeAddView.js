@@ -67,7 +67,7 @@ export const EmployeeAddView = () => {
 
   const onClose = () => {
     setOpen(false);
-    history.push("/admin");
+    history.push("/employee");
   };
 
   return (

@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import get from "lodash/get";
 import map from "lodash/map";
 import moment from "moment";
+import { Link as RouterLink } from "react-router-dom";
 
 import { EMPLOYEES } from "Queries/Employee";
 import { Table } from "Components/Tables/Table";
@@ -21,12 +22,19 @@ export const EmployeeTable = ({ openDialog }) => {
       const actions = (
         <>
           <ActionRouterButton
-            to={`/admin/edit/${id}`}
+            to={`/employee/edit/${id}`}
             title="Edit Employee"
             icon="edit"
           />
           <ActionLinkButton onClick={(e) => openDialog(e, id)} icon="delete" />
-          <RouterButton text="Review" to={`/review/${id}`} />
+          {/* <RouterButton text="Review" to={`/review/${id}`} /> */}
+          <RouterLink
+            to={{
+              pathname: "/review",
+              state: { employeeId: id },
+            }}>
+            Review
+          </RouterLink>
         </>
       );
       const created = moment(createdAt).format("MM/DD/YYYY");

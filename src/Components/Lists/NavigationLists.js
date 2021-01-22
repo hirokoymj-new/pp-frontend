@@ -7,8 +7,8 @@ export const TechNavItems = ({ setDrawerClosed }) => {
   return (
     <>
       <ListItemLink
-        to="/admin"
-        text="Admin"
+        to="/employee"
+        text="Employee Admin"
         icon={<LibraryBooksOutlinedIcon />}
         onClick={setDrawerClosed && setDrawerClosed}
       />

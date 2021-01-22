@@ -23,21 +23,21 @@ export const PERFORMANCES = gql`
   ${EmployeeFragments.employeeInfo}
 `;
 
-// export const PERFORMANCE = gql`
-//   query Performance(id: ID!) {
-//     performances {
-//       id
-//       title
-//       teamPlayer
-//       communication
-//       comment
-//       employee {
-//         ...EmployeeInfo
-//       }
-//       evaluator {
-//         ...EmployeeInfo
-//       }
-//     }
-//   }
-//   ${EmployeeFragments.employeeInfo}
-// `;
+export const PERFORMANCE = gql`
+  query Performance($id: ID!) {
+    performance(id: $id) {
+      id
+      title
+      teamPlayer
+      communication
+      comment
+      employee {
+        ...EmployeeInfo
+      }
+      evaluator {
+        ...EmployeeInfo
+      }
+    }
+  }
+  ${EmployeeFragments.employeeInfo}
+`;

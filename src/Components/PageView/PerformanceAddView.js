@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { useHistory, useParams } from "react-router-dom";
 
-import {
-  PerformanceAddFormController,
-  performance_title_options,
-  score_options,
-} from "Components/FormController/PerformanceAddFormController";
+import { PerformanceAddFormController } from "Components/FormController/PerformanceAddFormController";
+import { performance_title_options, score_options } from "Config/staticData";
 import { FormTextField } from "Components/Forms/FormTextField";
 import { FormSelect } from "Components/Forms/FormSelect";
 import { FormRadioGroup } from "Components/Forms/FormRadioGroup";
-
 import { FormSkeleton } from "Components/Skeleton/FormSkeleton";
 import { DrawerDialog } from "Components/Dialog/DrawerDialog";
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
@@ -85,19 +81,21 @@ const PerformanceAddFormDrawer = reduxForm({
 });
 
 export const PerformanceAddView = () => {
+  const { eid: employeeId } = useParams();
+
   const [open, setOpen] = useState(true);
   const history = useHistory();
-  const { id } = useParams();
-  console.log("PerformanceAddView", id);
-
   const onClose = () => {
     setOpen(false);
-    history.push(`/review/${id}`);
+    history.push({
+      pathname: "/review",
+      state: { employeeId },
+    });
   };
 
   return (
     <DashboardLayout>
-      <PerformanceAddFormController employeeId={id}>
+      <PerformanceAddFormController employeeId={employeeId}>
         {(props) => (
           <PerformanceAddFormDrawer {...props} open={open} onClose={onClose} />
         )}

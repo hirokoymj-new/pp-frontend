@@ -7,7 +7,6 @@ import { CREATE_EMPLOYEE } from "Mutations/Employee";
 import { EMPLOYEES } from "Queries/Employee";
 
 export const EmployeeAddFormController = ({ children }) => {
-  console.log("Employee Add Form Controller");
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const [createEmployee] = useMutation(CREATE_EMPLOYEE, {
@@ -16,7 +15,6 @@ export const EmployeeAddFormController = ({ children }) => {
 
   const onSubmit = async (values, dispatch) => {
     try {
-      console.log(values);
       await createEmployee({
         variables: {
           input: {

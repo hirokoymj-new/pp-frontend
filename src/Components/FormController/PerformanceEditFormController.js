@@ -6,19 +6,50 @@ import get from "lodash/get";
 import omitBy from "lodash/omitBy";
 import isNil from "lodash/isNil";
 
-import { CREATE_PERFORMANCE } from "Mutations/Performance";
-import { PERFORMANCES } from "Queries/Performance";
+import { UPDATE_PERFORMANCE } from "Mutations/Performance";
+import { PERFORMANCE, PERFORMANCES } from "Queries/Performance";
 import { EMPLOYEES } from "Queries/Employee";
 
-export const PerformanceAddFormController = ({ children, employeeId }) => {
+export const PerformanceEditFormController = ({
+  children,
+  performanceId,
+  employeeId,
+}) => {
+  console.log("PerformanceEditFormCongroller", performanceId);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  const [createPerformance] = useMutation(CREATE_PERFORMANCE, {
-    refetchQueries: [{ query: PERFORMANCES, variables: { employeeId } }],
+  const [updatePerformance] = useMutation(UPDATE_PERFORMANCE, {
+    variables: { id: performanceId },
+    refetchQueries: [
+      {
+        query: PERFORMANCES,
+        variables: { id: employeeId },
+        fetchPolicy: "network-only",
+      },
+    ],
   });
   const { data, loading } = useQuery(EMPLOYEES);
-  if (!loading) console.log(data);
+  const { data: performanceData, loading: performanceLoading } = useQuery(
+    PERFORMANCE,
+    {
+      variables: { id: performanceId },
+    }
+  );
 
+  if (!performanceLoading) console.log(performanceData);
+  const performance =
+    !performanceLoading && get(performanceData, "performance", {});
+
+  const initialValues = !performanceLoading && {
+    title: get(performance, "title"),
+    evaluator: get(performance, "evaluator.id"),
+    employee: get(performance, "employee.id"),
+    teamPlayer: get(performance, "teamPlayer"),
+    communication: get(performance, "communication"),
+    comment: get(performance, "comment", ""),
+  };
+
+  if (!loading) console.log(data);
   const employees = !loading && get(data, "employees", []);
   const employee_options =
     !loading &&
@@ -41,21 +72,24 @@ export const PerformanceAddFormController = ({ children, employeeId }) => {
         comment: get(values, "comment"),
         employee: employeeId,
       };
-      await createPerformance({
+      await updatePerformance({
         variables: {
           input: {
             ...omitBy(data, isNil),
           },
         },
       });
-      dispatch(destroy("Performance_Add_Form"));
-      enqueueSnackbar("Performance successfully created!", {
+      dispatch(destroy("Performance_Edit_Form"));
+      enqueueSnackbar("Performance successfully updated!", {
         variant: "success",
       });
-      history.push(`/review/${employeeId}`);
+      history.push({
+        pathname: "/review",
+        state: { employeeId },
+      });
     } catch (e) {
       console.error(e);
-      enqueueSnackbar("Failed to create performance", {
+      enqueueSnackbar("Failed to edit performance", {
         variant: "error",
       });
     }
@@ -73,7 +107,8 @@ export const PerformanceAddFormController = ({ children, employeeId }) => {
   return children({
     onSubmit,
     validate,
+    initialValues,
     employee_options,
-    loading,
+    loading: loading || performanceLoading,
   });
 };

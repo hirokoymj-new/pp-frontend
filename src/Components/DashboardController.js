@@ -61,11 +61,11 @@ export const DashboardController = connect(null, {
               path="/"
               exact
               render={() => {
-                return <Redirect to="/admin" />;
+                return <Redirect to="/employee" />;
               }}
             />
-            <Route path="/admin" component={EmployeeView} />
-            <Route path="/review/:id" component={PerformanceView} />
+            <Route path="/employee" component={EmployeeView} />
+            <Route path="/review" component={PerformanceView} />
           </Switch>
         </main>
       </SnackbarProvider>

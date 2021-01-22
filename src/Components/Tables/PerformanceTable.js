@@ -30,9 +30,10 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
       const created = moment(createdAt).format("MM/DD/YYYY");
       const fullName =
         get(evaluator, "firstName", "") + " " + get(evaluator, "lastName", "");
+      const formattedTitle = title.replaceAll("_", " ");
       return {
         id,
-        title,
+        formattedTitle,
         fullName,
         created,
         actions,
@@ -49,7 +50,7 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
         colmuns={[
           {
             label: "Title",
-            field: "title",
+            field: "formattedTitle",
           },
           {
             label: "Evaluator",
@@ -60,7 +61,7 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
             field: "created",
           },
           {
-            label: "Action",
+            label: "Edit",
             field: "actions",
           },
         ]}
