@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSnackbar } from "notistack";
 import { Route, Switch } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
 import { EmployeeTable } from "Components/Tables/EmployeeTable";
@@ -16,7 +17,14 @@ import { EmployeeEditView } from "Components/PageView/EmployeeEditView";
 import { EmployeeAddView } from "Components/PageView/EmployeeAddView";
 import { RouterButton } from "Components/Buttons/RouterButton";
 
+const useStyles = makeStyles((theme) => ({
+  addButton: {
+    marginBottom: theme.spacing(2),
+  },
+}));
+
 export const EmployeeView = () => {
+  const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
@@ -55,10 +63,6 @@ export const EmployeeView = () => {
 
   return (
     <>
-      <Switch>
-        <Route path={`/employee/edit/:id`} component={EmployeeEditView} />
-        <Route path={`/employee/add`} component={EmployeeAddView} />
-      </Switch>
       <DashboardLayout title="Employee Admin">
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
@@ -68,6 +72,7 @@ export const EmployeeView = () => {
               text="Add Employee"
               to="/employee/add"
               icon={<AddIcon />}
+              className={classes.addButton}
             />
             <Paper>
               <EmployeeTable openDialog={handleOpen} />
@@ -91,6 +96,10 @@ export const EmployeeView = () => {
           cancel={handleClose}
         />
       </DashboardLayout>
+      <Switch>
+        <Route path={`/employee/edit/:id`} component={EmployeeEditView} />
+        <Route path={`/employee/add`} component={EmployeeAddView} />
+      </Switch>
     </>
   );
 };

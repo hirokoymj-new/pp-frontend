@@ -52,7 +52,10 @@ export const PerformanceAddFormController = ({ children, employeeId }) => {
       enqueueSnackbar("Performance successfully created!", {
         variant: "success",
       });
-      history.push(`/review/${employeeId}`);
+      history.push({
+        pathname: "/review",
+        state: { employeeId },
+      });
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Failed to create performance", {

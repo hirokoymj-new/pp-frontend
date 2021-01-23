@@ -81,7 +81,8 @@ const PerformanceAddFormDrawer = reduxForm({
 });
 
 export const PerformanceAddView = () => {
-  const { eid: employeeId } = useParams();
+  const { eid } = useParams();
+  console.log("PerformanceAddView", eid);
 
   const [open, setOpen] = useState(true);
   const history = useHistory();
@@ -89,13 +90,13 @@ export const PerformanceAddView = () => {
     setOpen(false);
     history.push({
       pathname: "/review",
-      state: { employeeId },
+      state: { employeeId: eid },
     });
   };
 
   return (
     <DashboardLayout>
-      <PerformanceAddFormController employeeId={employeeId}>
+      <PerformanceAddFormController employeeId={eid}>
         {(props) => (
           <PerformanceAddFormDrawer {...props} open={open} onClose={onClose} />
         )}

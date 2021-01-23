@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import { Route, Switch, useLocation } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import get from "lodash/get";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
 import { PerformanceTable } from "Components/Tables/PerformanceTable";
@@ -12,9 +13,18 @@ import { PerformanceAddView } from "Components/PageView/PerformanceAddView";
 import { PerformanceEditView } from "Components/PageView/PerformanceEditView";
 import { EmployeeInfoCard } from "Components/Cards/EmployeeInfoCard";
 
+const useStyles = makeStyles((theme) => ({
+  addButton: {
+    marginBottom: theme.spacing(2),
+  },
+}));
+
 export const PerformanceView = () => {
+  const classes = useStyles();
   const location = useLocation();
+  console.log(location);
   const employeeId = get(location, "state.employeeId");
+  console.log("performanceView", employeeId);
 
   return (
     <>
@@ -37,6 +47,7 @@ export const PerformanceView = () => {
               text="Create New Review"
               to={`/review/add/${employeeId}`}
               icon={<AddIcon />}
+              className={classes.addButton}
             />
             <Paper>
               <PerformanceTable employeeId={employeeId} />

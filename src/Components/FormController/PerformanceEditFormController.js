@@ -16,18 +16,24 @@ export const PerformanceEditFormController = ({
   employeeId,
 }) => {
   console.log("PerformanceEditFormCongroller", performanceId);
+  console.log("employeeId", employeeId);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
+  // const [updatePerformance] = useMutation(UPDATE_PERFORMANCE, {
+  //   variables: { id: performanceId },
+  //   refetchQueries: [
+  //     {
+  //       query: PERFORMANCES,
+  //       variables: { id: employeeId },
+  //       fetchPolicy: "cache-only",
+  //     },
+  //   ],
+  // });
+
   const [updatePerformance] = useMutation(UPDATE_PERFORMANCE, {
     variables: { id: performanceId },
-    refetchQueries: [
-      {
-        query: PERFORMANCES,
-        variables: { id: employeeId },
-        fetchPolicy: "network-only",
-      },
-    ],
   });
+
   const { data, loading } = useQuery(EMPLOYEES);
   const { data: performanceData, loading: performanceLoading } = useQuery(
     PERFORMANCE,

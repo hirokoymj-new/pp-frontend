@@ -8,7 +8,6 @@ import { UPDATE_EMPLOYEE } from "Mutations/Employee";
 import { EMPLOYEES, EMPLOYEE_BY_ID } from "Queries/Employee";
 
 export const EmployeeEditFormController = ({ children, employeeId }) => {
-  console.log("Employee Edit Form Controller");
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const [updateEmployee] = useMutation(UPDATE_EMPLOYEE, {
@@ -19,8 +18,6 @@ export const EmployeeEditFormController = ({ children, employeeId }) => {
       id: employeeId,
     },
   });
-
-  console.log(data);
 
   const initialValues = !loading && {
     id: get(data, "employee.id"),
@@ -50,7 +47,7 @@ export const EmployeeEditFormController = ({ children, employeeId }) => {
       enqueueSnackbar("Employee data successfully updated!", {
         variant: "success",
       });
-      history.push("/admin");
+      history.push("/employee");
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Failed to update employee", {

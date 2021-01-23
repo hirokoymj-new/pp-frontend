@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const RouterButton = ({ to, text, icon }) => {
+export const RouterButton = ({ to, text, icon, className }) => {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,8 @@ export const RouterButton = ({ to, text, icon }) => {
         variant="contained"
         color="secondary"
         startIcon={icon}
-        classes={{ root: classes.root }}>
+        classes={{ root: classes.root }}
+        className={className ? className : {}}>
         {text}
       </Button>
     </Link>

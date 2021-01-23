@@ -57,7 +57,7 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
             field: "fullName",
           },
           {
-            label: "Created",
+            label: "Created On",
             field: "created",
           },
           {

@@ -62,6 +62,7 @@ const EmployeeAddFormDrawer = reduxForm({
 });
 
 export const EmployeeAddView = () => {
+  console.log("EmployeeAddView");
   const [open, setOpen] = useState(true);
   const history = useHistory();
 
