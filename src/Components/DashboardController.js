@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { DashboardHeader } from "Components/Headers/DashboardHeader";
 import { MenuDrawer, MobileMenuDrawer } from "Components/Drawers/MenuDrawer";
 import { PerformanceListView } from "Components/PageView/PerformanceListView";
-import { PerformanceView } from "Components/PageView/PerformanceView";
+// import { PerformanceView } from "Components/PageView/PerformanceView";
 import { EmployeeView } from "Components/PageView/EmployeeView";
 import { TestView } from "Components/PageView/TestView";
 import {
@@ -68,9 +68,8 @@ export const DashboardController = connect(null, {
             />
             <Route path="/employee" component={EmployeeView} />
             <Route path="/performanceList" component={PerformanceListView} />
-
             {/* <Route path="/review" exact component={PerformanceView} /> */}
-            <Route path="/review" component={PerformanceView} />
+            {/* <Route path="/review" component={PerformanceView} /> */}
             <Route path="/test" component={TestView} />
           </Switch>
         </main>

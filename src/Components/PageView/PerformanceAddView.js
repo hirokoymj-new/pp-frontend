@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { PerformanceAddFormController } from "Components/FormController/PerformanceAddFormController";
 import { performance_title_options, score_options } from "Config/staticData";
@@ -81,22 +81,16 @@ const PerformanceAddFormDrawer = reduxForm({
 });
 
 export const PerformanceAddView = () => {
-  const { eid } = useParams();
-  console.log("PerformanceAddView", eid);
-
   const [open, setOpen] = useState(true);
   const history = useHistory();
   const onClose = () => {
     setOpen(false);
-    history.push({
-      pathname: "/review",
-      state: { employeeId: eid },
-    });
+    history.push("/performanceList");
   };
 
   return (
     <DashboardLayout>
-      <PerformanceAddFormController employeeId={eid}>
+      <PerformanceAddFormController>
         {(props) => (
           <PerformanceAddFormDrawer {...props} open={open} onClose={onClose} />
         )}

@@ -13,7 +13,7 @@ import { PERFORMANCE } from "Queries/Performance";
 import { ListSkeleton } from "Components/Skeleton/ListSkeleton";
 
 const useStyles = makeStyles((theme) => ({
-  cardRoot: {
+  root: {
     boxShadow: "none",
     border: `1px solid ${theme.palette.grey[400]}`,
   },
@@ -49,7 +49,7 @@ export const PerformanceInfoCard = ({ id }) => {
       {loading ? (
         <ListSkeleton />
       ) : (
-        <Card className={classes.cardRoot}>
+        <Card className={classes.root}>
           <CardContent>
             <Grid container>
               <Grid item xs={12}>
