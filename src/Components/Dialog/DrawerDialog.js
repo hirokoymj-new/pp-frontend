@@ -61,8 +61,7 @@ export const DrawerDialog = ({
         <IconButton
           aria-label="close"
           className={classes.closeButton}
-          onClick={onClose}
-        >
+          onClick={onClose}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -72,8 +71,7 @@ export const DrawerDialog = ({
           color="primary"
           variant="outlined"
           className={classes.actionButton}
-          onClick={onClose}
-        >
+          onClick={onClose}>
           Cancel
         </Button>
         <Button
@@ -82,8 +80,7 @@ export const DrawerDialog = ({
           color="primary"
           disabled={submitting}
           onClick={onSubmit}
-          className={classes.actionButton}
-        >
+          className={classes.actionButton}>
           {submitLabel}
         </Button>
       </DialogActions>

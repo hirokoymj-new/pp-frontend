@@ -3,8 +3,6 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 import get from "lodash/get";
-import omitBy from "lodash/omitBy";
-import isNil from "lodash/isNil";
 
 import { UPDATE_PERFORMANCE } from "Mutations/Performance";
 import { PERFORMANCE } from "Queries/Performance";
@@ -15,25 +13,11 @@ export const PerformanceEditFormController = ({
   performanceId,
   employeeId,
 }) => {
-  console.log("PerformanceEditFormCongroller", performanceId);
-  console.log("employeeId", employeeId);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  // const [updatePerformance] = useMutation(UPDATE_PERFORMANCE, {
-  //   variables: { id: performanceId },
-  //   refetchQueries: [
-  //     {
-  //       query: PERFORMANCES,
-  //       variables: { id: employeeId },
-  //       fetchPolicy: "cache-only",
-  //     },
-  //   ],
-  // });
-
   const [updatePerformance] = useMutation(UPDATE_PERFORMANCE, {
     variables: { id: performanceId },
   });
-
   const { data, loading } = useQuery(EMPLOYEES);
   const { data: performanceData, loading: performanceLoading } = useQuery(
     PERFORMANCE,
@@ -42,7 +26,6 @@ export const PerformanceEditFormController = ({
     }
   );
 
-  if (!performanceLoading) console.log(performanceData);
   const performance =
     !performanceLoading && get(performanceData, "performance", {});
 
@@ -55,7 +38,6 @@ export const PerformanceEditFormController = ({
     comment: get(performance, "comment", ""),
   };
 
-  if (!loading) console.log(data);
   const employees = !loading && get(data, "employees", []);
   const employee_options =
     !loading &&
@@ -70,18 +52,11 @@ export const PerformanceEditFormController = ({
 
   const onSubmit = async (values, dispatch) => {
     try {
-      const data = {
-        title: get(values, "title"),
-        evaluator: get(values, "evaluator"),
-        teamPlayer: get(values, "teamPlayer"),
-        communication: get(values, "communication"),
-        comment: get(values, "comment"),
-        employee: employeeId,
-      };
       await updatePerformance({
         variables: {
           input: {
-            ...omitBy(data, isNil),
+            ...values,
+            employee: employeeId,
           },
         },
       });
@@ -89,10 +64,7 @@ export const PerformanceEditFormController = ({
       enqueueSnackbar("Performance successfully updated!", {
         variant: "success",
       });
-      history.push({
-        pathname: "/review",
-        state: { employeeId },
-      });
+      history.push(`/review/${employeeId}`);
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Failed to edit performance", {

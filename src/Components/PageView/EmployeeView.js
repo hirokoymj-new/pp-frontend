@@ -63,7 +63,7 @@ export const EmployeeView = () => {
 
   return (
     <>
-      <DashboardLayout title="Employee Admin">
+      <DashboardLayout title="Employee List">
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <RouterButton

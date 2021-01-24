@@ -4,16 +4,16 @@ import get from "lodash/get";
 import map from "lodash/map";
 import moment from "moment";
 
-import { PERFORMANCES } from "Queries/Performance";
+import { PERFORMANCE_BY_EMPLOYEE } from "Queries/Performance";
 import { Table } from "Components/Tables/Table";
 import { Title } from "Components/Titles/Title";
 import { ActionRouterButton } from "Components/Buttons/ActionRouterButton";
 
-export const PerformanceTable = ({ openDialog, employeeId }) => {
-  const { data, loading } = useQuery(PERFORMANCES, {
-    variables: { employeeId },
+export const EmployeePerformanceTable = ({ openDialog, employeeId }) => {
+  const { data, loading } = useQuery(PERFORMANCE_BY_EMPLOYEE, {
+    variables: { eid: employeeId },
   });
-  const performances = !loading && get(data, "performances", []);
+  const performances = !loading && get(data, "performanceByEmployee", []);
 
   const mappedData = map(
     performances,
@@ -21,7 +21,7 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
       const actions = (
         <>
           <ActionRouterButton
-            to={`/review/edit/${id}`}
+            to={`/review/${employeeId}/edit/${id}`}
             title="Edit Review"
             icon="edit"
           />
@@ -43,7 +43,7 @@ export const PerformanceTable = ({ openDialog, employeeId }) => {
 
   return (
     <>
-      <Title text="Performance List" />
+      <Title text="Performance Reviews" />
       <Table
         data={mappedData}
         loading={loading}

@@ -3,12 +3,12 @@ import { Field, reduxForm } from "redux-form";
 import { useParams, useHistory } from "react-router-dom";
 
 import { PerformanceEditFormController } from "Components/FormController/PerformanceEditFormController";
-import { performance_title_options, score_options } from "Config/staticData";
-import { FormTextField } from "../Forms/FormTextField";
+import { score_options } from "Config/staticData";
 import { FormSkeleton } from "Components/Skeleton/FormSkeleton";
 import { DrawerDialog } from "Components/Dialog/DrawerDialog";
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
 import { FormSelect } from "Components/Forms/FormSelect";
+import { FormTextField } from "Components/Forms/FormTextField";
 import { FormRadioGroup } from "Components/Forms/FormRadioGroup";
 
 const PerformanceEditFormDrawer = reduxForm({
@@ -23,8 +23,6 @@ const PerformanceEditFormDrawer = reduxForm({
     employee_options,
     initialValues,
   }) => {
-    console.log("PerformanceEditDrawer");
-    console.log(initialValues);
     return (
       <DrawerDialog
         open={open}
@@ -39,12 +37,11 @@ const PerformanceEditFormDrawer = reduxForm({
           <>
             <Field
               name="title"
-              component={FormSelect}
+              component={FormTextField}
               fullWidth
               variant="outlined"
               label="Title"
               margin="normal"
-              options={performance_title_options}
             />
             <Field
               name="evaluator"
@@ -70,7 +67,7 @@ const PerformanceEditFormDrawer = reduxForm({
               component={FormRadioGroup}
               fullWidth
               variant="outlined"
-              label="Is she/he a Team Player"
+              label="A Team Player"
               margin="normal"
               options={score_options}
               row
@@ -92,22 +89,19 @@ const PerformanceEditFormDrawer = reduxForm({
   }
 );
 
-export const PerformanceEditView = ({ employeeId }) => {
-  const { id } = useParams();
+export const PerformanceEditView = () => {
+  const { id, pid } = useParams();
   const [open, setOpen] = useState(true);
   const history = useHistory();
 
   const onClose = () => {
     setOpen(false);
-    history.push({
-      pathname: "/review",
-      state: { employeeId },
-    });
+    history.push(`/review/${id}`);
   };
 
   return (
     <DashboardLayout>
-      <PerformanceEditFormController performanceId={id} employeeId={employeeId}>
+      <PerformanceEditFormController performanceId={pid} employeeId={id}>
         {(props) => (
           <PerformanceEditFormDrawer {...props} open={open} onClose={onClose} />
         )}

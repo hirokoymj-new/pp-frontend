@@ -2,9 +2,9 @@ import gql from "graphql-tag";
 
 import { EmployeeFragments } from "./EmployeeFragments";
 
-export const PERFORMANCES = gql`
-  query Performances {
-    performances {
+export const PERFORMANCE_BY_EMPLOYEE = gql`
+  query PerformanceByEmployee($eid: ID!) {
+    performanceByEmployee(eid: $eid) {
       id
       title
       teamPlayer

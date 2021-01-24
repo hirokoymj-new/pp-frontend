@@ -3,21 +3,21 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 import get from "lodash/get";
-import omitBy from "lodash/omitBy";
-import isNil from "lodash/isNil";
 
 import { CREATE_PERFORMANCE } from "Mutations/Performance";
-import { PERFORMANCES } from "Queries/Performance";
+import { PERFORMANCE_BY_EMPLOYEE } from "Queries/Performance";
 import { EMPLOYEES } from "Queries/Employee";
 
 export const PerformanceAddFormController = ({ children, employeeId }) => {
+  console.log("PerformanceAddFormController", employeeId);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const [createPerformance] = useMutation(CREATE_PERFORMANCE, {
-    refetchQueries: [{ query: PERFORMANCES, variables: { employeeId } }],
+    refetchQueries: [
+      { query: PERFORMANCE_BY_EMPLOYEE, variables: { eid: employeeId } },
+    ],
   });
   const { data, loading } = useQuery(EMPLOYEES);
-  if (!loading) console.log(data);
 
   const employees = !loading && get(data, "employees", []);
   const employee_options =
@@ -33,18 +33,11 @@ export const PerformanceAddFormController = ({ children, employeeId }) => {
 
   const onSubmit = async (values, dispatch) => {
     try {
-      const data = {
-        title: get(values, "title"),
-        evaluator: get(values, "evaluator"),
-        teamPlayer: get(values, "teamPlayer"),
-        communication: get(values, "communication"),
-        comment: get(values, "comment"),
-        employee: employeeId,
-      };
       await createPerformance({
         variables: {
           input: {
-            ...omitBy(data, isNil),
+            ...values,
+            employee: employeeId,
           },
         },
       });
@@ -52,10 +45,7 @@ export const PerformanceAddFormController = ({ children, employeeId }) => {
       enqueueSnackbar("Performance successfully created!", {
         variant: "success",
       });
-      history.push({
-        pathname: "/review",
-        state: { employeeId },
-      });
+      history.push(`/review/${employeeId}`);
     } catch (e) {
       console.error(e);
       enqueueSnackbar("Failed to create performance", {

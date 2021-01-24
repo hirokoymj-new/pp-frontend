@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { PerformanceAddFormController } from "Components/FormController/PerformanceAddFormController";
-import { performance_title_options, score_options } from "Config/staticData";
+import { score_options } from "Config/staticData";
 import { FormTextField } from "Components/Forms/FormTextField";
 import { FormSelect } from "Components/Forms/FormSelect";
 import { FormRadioGroup } from "Components/Forms/FormRadioGroup";
@@ -17,7 +17,7 @@ const PerformanceAddFormDrawer = reduxForm({
   return (
     <DrawerDialog
       open={open}
-      title="Create Performance"
+      title="Create New Review"
       onClose={onClose}
       onSubmit={handleSubmit}
       submitting={submitting}
@@ -28,12 +28,11 @@ const PerformanceAddFormDrawer = reduxForm({
         <>
           <Field
             name="title"
-            component={FormSelect}
+            component={FormTextField}
             fullWidth
             variant="outlined"
             label="Title"
             margin="normal"
-            options={performance_title_options}
           />
           <Field
             name="evaluator"
@@ -59,7 +58,7 @@ const PerformanceAddFormDrawer = reduxForm({
             component={FormRadioGroup}
             fullWidth
             variant="outlined"
-            label="Is she/he a Team Player"
+            label="Team Player"
             margin="normal"
             options={score_options}
             row
@@ -81,16 +80,17 @@ const PerformanceAddFormDrawer = reduxForm({
 });
 
 export const PerformanceAddView = () => {
+  const { id } = useParams();
   const [open, setOpen] = useState(true);
   const history = useHistory();
   const onClose = () => {
     setOpen(false);
-    history.push("/performanceList");
+    history.push(`/review/${id}`);
   };
 
   return (
     <DashboardLayout>
-      <PerformanceAddFormController>
+      <PerformanceAddFormController employeeId={id}>
         {(props) => (
           <PerformanceAddFormDrawer {...props} open={open} onClose={onClose} />
         )}
