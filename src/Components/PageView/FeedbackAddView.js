@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import { useHistory, useParams } from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
 
 import { FeedbackAddFormController } from "Components/FormController/FeedbackAddFormController";
 import { FormTextField } from "../Forms/FormTextField";
 import { FormSkeleton } from "Components/Skeleton/FormSkeleton";
 import { DrawerDialog } from "Components/Dialog/DrawerDialog";
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
+import { PerformanceInfoCard } from "Components/Cards/PerformanceInfoCard";
 
 const FeedbackAddFormDrawer = reduxForm({
   form: "Feedback_Add_Form",
-})(({ handleSubmit, submitting, loading, open, onClose }) => {
+})(({ handleSubmit, submitting, loading, open, onClose, performanceId }) => {
   return (
     <DrawerDialog
       open={open}
@@ -23,6 +25,8 @@ const FeedbackAddFormDrawer = reduxForm({
         <FormSkeleton fieldCount={2} />
       ) : (
         <>
+          <PerformanceInfoCard id={performanceId} />
+          <Divider />
           <Field
             name="name"
             component={FormTextField}
@@ -38,7 +42,7 @@ const FeedbackAddFormDrawer = reduxForm({
             multiline
             rows={4}
             variant="outlined"
-            label="Comment"
+            label="Feedback"
             margin="normal"
           />
         </>
@@ -61,7 +65,12 @@ export const FeedbackAddView = () => {
     <DashboardLayout>
       <FeedbackAddFormController performanceId={id}>
         {(props) => (
-          <FeedbackAddFormDrawer {...props} open={open} onClose={onClose} />
+          <FeedbackAddFormDrawer
+            {...props}
+            open={open}
+            onClose={onClose}
+            performanceId={id}
+          />
         )}
       </FeedbackAddFormController>
     </DashboardLayout>

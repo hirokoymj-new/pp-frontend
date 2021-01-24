@@ -18,7 +18,7 @@ export const ListSkeleton = () => {
       <Skeleton width="100%">
         <Typography variant="h2">.</Typography>
       </Skeleton>
-      <Skeleton variant="rect" width="100%" height={380} />
+      <Skeleton variant="rect" width="100%" height={200} />
     </Paper>
   );
 };

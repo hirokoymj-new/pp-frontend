@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiPaper-root": {
       padding: theme.spacing(2),
       display: "flex",
-      overflow: "auto",
       flexDirection: "column",
     },
+
     "& .MuiTableCell-head": {
       fontWeight: 600,
     },

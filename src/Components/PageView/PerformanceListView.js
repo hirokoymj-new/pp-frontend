@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 
 import { DashboardLayout } from "Components/Layouts/DashboardLayout";
 import { FeedbackAddView } from "Components/PageView/FeedbackAddView";
-import { CollapsibleTable } from "Components/Tables/CollapsibleTable";
+import { PerformanceTableWithCollapse } from "Components/Tables/PerformanceTableWithCollapse";
 import { Title } from "Components/Titles/Title";
 
 // const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ export const PerformanceListView = () => {
           <Grid item xs={12}>
             <Paper>
               <Title text="Performance List" />
-              <CollapsibleTable />
+              <PerformanceTableWithCollapse />
             </Paper>
           </Grid>
         </Grid>

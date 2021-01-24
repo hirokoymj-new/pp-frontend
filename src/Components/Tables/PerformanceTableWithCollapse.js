@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   feedbackRow: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "#e8eaf6",
     paddingBottom: 0,
     paddingTop: 0,
   },
@@ -95,7 +95,7 @@ const Row = (props) => {
   );
 };
 
-export const CollapsibleTable = () => {
+export const PerformanceTableWithCollapse = () => {
   const { data, loading } = useQuery(ALL_PERFORMANCES);
   const performances = !loading && get(data, "performances", []);
 
