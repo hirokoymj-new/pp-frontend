@@ -7,7 +7,7 @@ import omitBy from "lodash/omitBy";
 import isNil from "lodash/isNil";
 
 import { UPDATE_PERFORMANCE } from "Mutations/Performance";
-import { PERFORMANCE, PERFORMANCES } from "Queries/Performance";
+import { PERFORMANCE } from "Queries/Performance";
 import { EMPLOYEES } from "Queries/Employee";
 
 export const PerformanceEditFormController = ({

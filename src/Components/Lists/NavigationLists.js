@@ -8,16 +8,16 @@ export const TechNavItems = ({ setDrawerClosed }) => {
     <>
       <ListItemLink
         to="/employee"
-        text="Employee Admin"
+        text="Employee"
         icon={<LibraryBooksOutlinedIcon />}
         onClick={setDrawerClosed && setDrawerClosed}
       />
-      {/* <ListItemLink
-        to="/review"
+      <ListItemLink
+        to="/performanceList"
         text="Performance"
         icon={<LibraryBooksOutlinedIcon />}
         onClick={setDrawerClosed && setDrawerClosed}
-      /> */}
+      />
     </>
   );
 };

@@ -24,7 +24,6 @@ export const PerformanceView = () => {
   const location = useLocation();
   console.log(location);
   const employeeId = get(location, "state.employeeId");
-  console.log("performanceView", employeeId);
 
   return (
     <>
@@ -36,6 +35,7 @@ export const PerformanceView = () => {
         />
       </Switch>
       <DashboardLayout title="Performance Review">
+        <h1>{employeeId}</h1>
         <Grid container spacing={3} justify="center">
           <Grid item xs={12} md={5}>
             <EmployeeInfoCard employeeId={employeeId} />
@@ -58,3 +58,5 @@ export const PerformanceView = () => {
     </>
   );
 };
+
+

@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 import { EmployeeFragments } from "./EmployeeFragments";
 
 export const PERFORMANCES = gql`
-  query Performances($employeeId: ID) {
-    performances(employeeId: $employeeId) {
+  query Performances {
+    performances {
       id
       title
       teamPlayer
@@ -16,8 +16,36 @@ export const PERFORMANCES = gql`
       evaluator {
         ...EmployeeInfo
       }
+      feedbacks {
+        id
+        name
+        comment
+      }
       createdAt
       updatedAt
+    }
+  }
+  ${EmployeeFragments.employeeInfo}
+`;
+
+export const ALL_PERFORMANCES = gql`
+  query AllPerformances {
+    performances {
+      id
+      title
+      employee {
+        ...EmployeeInfo
+      }
+      evaluator {
+        ...EmployeeInfo
+      }
+      feedbacks {
+        id
+        name
+        comment
+        createdAt
+      }
+      createdAt
     }
   }
   ${EmployeeFragments.employeeInfo}

@@ -3,14 +3,12 @@ import { useQuery } from "@apollo/react-hooks";
 import get from "lodash/get";
 import map from "lodash/map";
 import moment from "moment";
-import { Link as RouterLink } from "react-router-dom";
 
 import { EMPLOYEES } from "Queries/Employee";
 import { Table } from "Components/Tables/Table";
 import { Title } from "Components/Titles/Title";
 import { ActionRouterButton } from "Components/Buttons/ActionRouterButton";
 import { ActionLinkButton } from "Components/Buttons/ActionLinkButton";
-import { RouterButton } from "Components/Buttons/RouterButton";
 
 export const EmployeeTable = ({ openDialog }) => {
   const { data, loading } = useQuery(EMPLOYEES);
@@ -27,14 +25,6 @@ export const EmployeeTable = ({ openDialog }) => {
             icon="edit"
           />
           <ActionLinkButton onClick={(e) => openDialog(e, id)} icon="delete" />
-          {/* <RouterButton text="Review" to={`/review/${id}`} /> */}
-          <RouterLink
-            to={{
-              pathname: "/review",
-              state: { employeeId: id },
-            }}>
-            Review
-          </RouterLink>
         </>
       );
       const created = moment(createdAt).format("MM/DD/YYYY");
