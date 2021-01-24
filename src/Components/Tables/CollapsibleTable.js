@@ -47,7 +47,9 @@ const Row = (props) => {
     get(row, "employee.firstName") + " " + get(row, "employee.lastName");
   const evaluatorFullName =
     get(row, "evaluator.firstName") + " " + get(row, "evaluator.lastName");
-  const feedbacks = get(row, "feedbacks", []);
+  const feedbacks = get(row, "feedbacks", []).sort((a, b) =>
+    a.id < b.id ? 1 : -1
+  );
   const actions = (
     <>
       <RouterButton
