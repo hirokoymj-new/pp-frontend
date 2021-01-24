@@ -11,7 +11,6 @@ import { MenuDrawer, MobileMenuDrawer } from "Components/Drawers/MenuDrawer";
 import { PerformanceListView } from "Components/PageView/PerformanceListView";
 import { PerformanceView } from "Components/PageView/PerformanceView";
 import { EmployeeView } from "Components/PageView/EmployeeView";
-import { TestView } from "Components/PageView/TestView";
 import {
   closeNavigation,
   openNavigation,
@@ -69,7 +68,6 @@ export const DashboardController = connect(null, {
             <Route path="/employee" component={EmployeeView} />
             <Route path="/review/:id" component={PerformanceView} />
             <Route path="/performanceList" component={PerformanceListView} />
-            <Route path="/test" component={TestView} />
           </Switch>
         </main>
       </SnackbarProvider>

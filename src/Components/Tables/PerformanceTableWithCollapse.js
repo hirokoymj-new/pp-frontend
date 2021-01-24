@@ -14,6 +14,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useQuery } from "@apollo/react-hooks";
 import get from "lodash/get";
 import AddIcon from "@material-ui/icons/Add";
+import moment from "moment";
 
 import { ALL_PERFORMANCES } from "Queries/Performance";
 import { FeedbackCard } from "Components/Cards/FeedbackCard";
@@ -50,6 +51,7 @@ const Row = (props) => {
   const feedbacks = get(row, "feedbacks", []).sort((a, b) =>
     a.id < b.id ? 1 : -1
   );
+  const created = moment(get(row, "createdAt")).format("MM/DD/YYYY");
   const actions = (
     <>
       <RouterButton
@@ -75,10 +77,11 @@ const Row = (props) => {
         <TableCell>{title}</TableCell>
         <TableCell>{employeeFullName}</TableCell>
         <TableCell>{evaluatorFullName}</TableCell>
+        <TableCell>{created}</TableCell>
         <TableCell>{actions}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className={classes.feedbackRow} colSpan={5}>
+        <TableCell className={classes.feedbackRow} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -111,6 +114,7 @@ export const PerformanceTableWithCollapse = () => {
               <TableCell>Title</TableCell>
               <TableCell>Employee</TableCell>
               <TableCell>Evaluator</TableCell>
+              <TableCell>Created On</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>

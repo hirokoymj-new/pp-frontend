@@ -11,6 +11,7 @@ import moment from "moment";
 
 import { PERFORMANCE } from "Queries/Performance";
 import { ListSkeleton } from "Components/Skeleton/ListSkeleton";
+import { score_options } from "Config/staticData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,7 @@ export const PerformanceInfoCard = ({ id }) => {
   const communication = isNull(get(performance, "communication"))
     ? "0"
     : get(performance, "communication");
+
   const fullName = `${get(performance, "employee.firstName")} ${get(
     performance,
     "employee.lastName"
@@ -86,7 +88,7 @@ export const PerformanceInfoCard = ({ id }) => {
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body1" align="right">
-                  {teamPlayer} point
+                  {teamPlayer}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -94,7 +96,7 @@ export const PerformanceInfoCard = ({ id }) => {
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body1" align="right">
-                  {communication} point
+                  {communication}
                 </Typography>
               </Grid>
             </Grid>

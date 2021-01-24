@@ -47,7 +47,6 @@ export const EmployeeAddFormController = ({ children }) => {
         errors.email = "Enter a valid email";
       }
     }
-
     return errors;
   };
 

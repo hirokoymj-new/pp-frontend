@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { UPDATE_EMPLOYEE } from "Mutations/Employee";
 import { EMPLOYEES, EMPLOYEE_BY_ID } from "Queries/Employee";
+import { emailRegex } from "Config/staticData";
 
 export const EmployeeEditFormController = ({ children, employeeId }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -60,8 +61,13 @@ export const EmployeeEditFormController = ({ children, employeeId }) => {
     const errors = {};
     if (!values.firstName) errors.firstName = "Required";
     if (!values.lastName) errors.lastName = "Required";
-    if (!values.email) errors.email = "Required";
-
+    if (!values.email) {
+      errors.email = "Enter a valid email";
+    } else {
+      if (!emailRegex.test(values.email)) {
+        errors.email = "Enter a valid email";
+      }
+    }
     return errors;
   };
 

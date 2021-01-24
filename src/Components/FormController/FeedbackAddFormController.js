@@ -7,7 +7,6 @@ import { CREATE_FEEDBACK } from "Mutations/Feedback";
 import { ALL_PERFORMANCES } from "Queries/Performance";
 
 export const FeedbackAddFormController = ({ children, performanceId }) => {
-  console.log("FeedbackAddFormController", performanceId);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const [createFeedback] = useMutation(CREATE_FEEDBACK, {
